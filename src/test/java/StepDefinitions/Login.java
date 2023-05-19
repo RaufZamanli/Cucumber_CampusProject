@@ -5,6 +5,14 @@ import Utilities.WD;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Login {
 
@@ -18,8 +26,10 @@ public class Login {
     @When("Enter username and password and click login button")
     public void enterUsernameAndPasswordAndClickLoginButton() {
 
-        dc.sendKeysFunction(dc.username, "turkeyts");
-        dc.sendKeysFunction(dc.password, "TechnoStudy123");
+        Hooks hk = new Hooks();
+
+        dc.sendKeysFunction(dc.username, hk.getData().get(0));
+        dc.sendKeysFunction(dc.password, hk.getData().get(1));
         dc.clickFunction(dc.loginButton);
     }
 
@@ -27,4 +37,9 @@ public class Login {
     public void userShouldLoginSuccesfully() {
         dc.verifyContainsTextFunction(dc.txtTechnoStudy, "Techno Study");
     }
+
+
+
 }
+
+
